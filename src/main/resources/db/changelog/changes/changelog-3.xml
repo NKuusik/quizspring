@@ -11,11 +11,11 @@
         http://www.liquibase.org/xml/ns/pro
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
-    <changeSet  id="1"  author="Norman">
-        <sql dbms="sqlite">
-            CREATE TABLE season(
-                season_id INTEGER PRIMARY KEY,
-                season_name TEXT NOT NULL UNIQUE
+    <changeSet  id="3"  author="Norman">
+        <sql>
+            CREATE TABLE team(
+                team_id INTEGER PRIMARY KEY,
+                team_name TEXT NOT NULL UNIQUE
             );
         </sql>
     </changeSet>

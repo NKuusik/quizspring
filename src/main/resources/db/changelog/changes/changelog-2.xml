@@ -11,11 +11,14 @@
         http://www.liquibase.org/xml/ns/pro
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
-    <changeSet  id="1"  author="Norman">
-        <sql dbms="sqlite">
-            CREATE TABLE season(
-                season_id INTEGER PRIMARY KEY,
-                season_name TEXT NOT NULL UNIQUE
+    <changeSet  id="2"  author="Norman">
+        <sql>
+            CREATE TABLE game(
+                game_id INTEGER PRIMARY KEY,
+                game_number INTEGER NOT NULL UNIQUE CHECK (typeof(game_number) = 'integer'),
+                season_key INTEGER NOT NULL,
+                FOREIGN KEY (season_key)
+                    REFERENCES season (season_id)
             );
         </sql>
     </changeSet>

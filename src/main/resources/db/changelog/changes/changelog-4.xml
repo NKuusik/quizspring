@@ -11,11 +11,18 @@
         http://www.liquibase.org/xml/ns/pro
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
-    <changeSet  id="1"  author="Norman">
-        <sql dbms="sqlite">
-            CREATE TABLE season(
-                season_id INTEGER PRIMARY KEY,
-                season_name TEXT NOT NULL UNIQUE
+    <changeSet  id="4"  author="Norman">
+        <sql>
+            CREATE TABLE result(
+                result_id INTEGER PRIMARY KEY,
+                result REAL NOT NULL CHECK (typeof(result) = 'real'),
+                team_key INTEGER NOT NULL,
+                game_key INTEGER NOT NULL,
+                FOREIGN KEY(team_key)
+                    REFERENCES team (team_id),
+                FOREIGN KEY(game_key)
+                    REFERENCES game (game_id),
+                UNIQUE (team_key, game_key) ON CONFLICT ABORT
             );
         </sql>
     </changeSet>
