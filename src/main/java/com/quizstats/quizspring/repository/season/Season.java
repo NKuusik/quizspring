@@ -1,25 +1,21 @@
-package com.quizstats.quizspring.repository.user;
-
+package com.quizstats.quizspring.repository.season;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
-
+@Builder
+public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "season_id")
     private Integer id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name= "last_name")
-    private String lastName;
-
+    @Column(name = "season_name")
+    private String name;
 }
