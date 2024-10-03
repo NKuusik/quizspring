@@ -14,9 +14,13 @@ import java.util.List;
 @RequestMapping("/game")
 public class GameController {
 
+    private final GameService gameService;
+
     @Autowired
-    private GameService gameService;
-    
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
+
     @GetMapping
     List<GameDTO> getAllGames(
         @RequestParam(name = "season", required = false) String seasonName) {

@@ -1,18 +1,15 @@
 package com.quizstats.quizspring.repository.season;
-
-import com.quizstats.quizspring.repository.game.Game;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

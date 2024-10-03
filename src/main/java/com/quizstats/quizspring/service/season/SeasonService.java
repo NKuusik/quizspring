@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SeasonService {
 
+    private final SeasonRepository seasonRepository;
+
     @Autowired
-    private SeasonRepository seasonRepository;
+    public SeasonService(SeasonRepository seasonRepository) {
+        this.seasonRepository = seasonRepository;
+    }
 
     public List<SeasonDTO> getAllSeasons() {
         return seasonRepository.findAll().stream().map(SeasonMapper.INSTANCE::toDTO).toList();

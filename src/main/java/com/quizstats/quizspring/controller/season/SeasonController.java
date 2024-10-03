@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("/season")
 public class SeasonController {
 
+    private final SeasonService seasonService;
+
     @Autowired
-    private SeasonService seasonService;
+    public SeasonController(SeasonService seasonService) {
+        this.seasonService = seasonService;
+    }
 
     @GetMapping
     List<SeasonDTO> getAllSeasons() {
