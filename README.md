@@ -5,6 +5,7 @@
 1. Run the spring application so that tables would be created in liquibase 
 2. Run `python3 db_initialization/copy_data.py` from the root of the project 
 to transform data in .csv files to database tables.
+   - Note that due to differences in pathname conventions, this script does not work in a Windows environment.
 
 ## Useful database scripts
 
