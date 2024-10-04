@@ -28,7 +28,9 @@ public class ResultController {
         @RequestParam(name= "team") Optional<String> teamNameOptional,
         @RequestParam(name= "game") Optional<Integer> gameNumberOptional,
         @RequestParam(name="season") Optional<String> seasonNameOptional) {
-        if (seasonNameOptional.isPresent()) {
+        if (seasonNameOptional.isPresent() && teamNameOptional.isPresent()) {
+            return getAllResultsBySeasonAndTeam(seasonNameOptional.get(), teamNameOptional.get());
+        } else if (seasonNameOptional.isPresent()) {
             return getAllResultsBySeason(seasonNameOptional.get());
         } else if (teamNameOptional.isPresent() && gameNumberOptional.isPresent()) {
             return getAllResultsByTeamAndGame(teamNameOptional.get(), gameNumberOptional.get());
@@ -42,6 +44,19 @@ public class ResultController {
         }
     }
 
+
+    private List<ResultDTO> getAllResultsBySeasonAndTeam(String seasonName, String teamName) {
+        return resultService.getAllResultsBySeasonAndTeam(seasonName, teamName);
+    }
+
+    private List<ResultDTO> getAllResultsBySeason(String seasonName) {
+        return resultService.getAllResultsBySeason(seasonName);
+    }
+
+    private List<ResultDTO> getAllResultsByTeamAndGame(String teamName, Integer gameNumber) {
+        return resultService.getAllResultsByTeamAndGame(teamName, gameNumber);
+    }
+
     private List<ResultDTO> getAllResultsByTeam(String teamName) {
         return resultService.getAllResultsByTeam(teamName);
     }
@@ -50,11 +65,4 @@ public class ResultController {
         return resultService.getAllResultsByGame(gameNumber);
     }
 
-    private List<ResultDTO> getAllResultsByTeamAndGame(String teamName, Integer gameNumber) {
-        return resultService.getAllResultsByTeamAndGame(teamName, gameNumber);
-    }
-
-    private List<ResultDTO> getAllResultsBySeason(String seasonName) {
-        return resultService.getAllResultsBySeason(seasonName);
-    }
 }

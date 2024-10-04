@@ -31,4 +31,8 @@ public class ResultService {
     public List<ResultDTO> getAllResultsBySeason(String seasonName) {
         return ResultMapper.INSTANCE.toDTOList(resultRepository.findByGame_Season_Name(seasonName));
     }
+
+    public List<ResultDTO> getAllResultsBySeasonAndTeam(String seasonName, String teamName) {
+        return ResultMapper.INSTANCE.toDTOList(resultRepository.findByGame_Season_NameAndTeam_Name(seasonName, teamName));
+    }
 }
