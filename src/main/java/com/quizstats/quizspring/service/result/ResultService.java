@@ -27,4 +27,8 @@ public class ResultService {
     public List<ResultDTO> getAllResultsByTeamAndGame(String teamName, Integer gameNumber) {
         return ResultMapper.INSTANCE.toDTOList(resultRepository.findByTeam_NameAndGame_GameNumber(teamName, gameNumber));
     }
+
+    public List<ResultDTO> getAllResultsBySeason(String seasonName) {
+        return ResultMapper.INSTANCE.toDTOList(resultRepository.findByGame_Season_Name(seasonName));
+    }
 }

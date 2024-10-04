@@ -26,8 +26,11 @@ public class ResultController {
     @GetMapping
     List<ResultDTO> getAllResults(
         @RequestParam(name= "team") Optional<String> teamNameOptional,
-        @RequestParam(name= "game") Optional<Integer> gameNumberOptional) {
-        if (teamNameOptional.isPresent() && gameNumberOptional.isPresent()) {
+        @RequestParam(name= "game") Optional<Integer> gameNumberOptional,
+        @RequestParam(name="season") Optional<String> seasonNameOptional) {
+        if (seasonNameOptional.isPresent()) {
+            return getAllResultsBySeason(seasonNameOptional.get());
+        } else if (teamNameOptional.isPresent() && gameNumberOptional.isPresent()) {
             return getAllResultsByTeamAndGame(teamNameOptional.get(), gameNumberOptional.get());
         } else if (teamNameOptional.isPresent()) {
             return getAllResultsByTeam(teamNameOptional.get());
@@ -49,5 +52,9 @@ public class ResultController {
 
     private List<ResultDTO> getAllResultsByTeamAndGame(String teamName, Integer gameNumber) {
         return resultService.getAllResultsByTeamAndGame(teamName, gameNumber);
+    }
+
+    private List<ResultDTO> getAllResultsBySeason(String seasonName) {
+        return resultService.getAllResultsBySeason(seasonName);
     }
 }
