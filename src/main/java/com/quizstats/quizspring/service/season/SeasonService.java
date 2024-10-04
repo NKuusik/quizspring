@@ -19,9 +19,8 @@ public class SeasonService {
     }
 
     public List<SeasonDTO> getAllSeasons() {
-        return seasonRepository.findAll().stream().map(SeasonMapper.INSTANCE::toDTO).toList();
+        return SeasonMapper.INSTANCE.toDTOList(seasonRepository.findAll());
     }
-
 
     public SeasonDTO getSeasonByName(String name) {
         return seasonRepository.findByName(name).map(SeasonMapper.INSTANCE::toDTO)
