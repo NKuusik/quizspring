@@ -1,8 +1,10 @@
 package com.quizstats.quizspring.controller.result;
 
 import com.quizstats.quizspring.controller.result.dto.ResultDTO;
+import com.quizstats.quizspring.exception.ApiRequestException;
 import com.quizstats.quizspring.service.result.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +41,8 @@ public class ResultController {
         } else if (gameNumberOptional.isPresent()) {
             return getAllResultsByGame(gameNumberOptional.get());
         } else {
-            // Todo: throw error instead.
-            return new ArrayList<>();
+
+            throw new ApiRequestException("Request needs to have one of the following parameters: team, game, season");
         }
     }
 
@@ -64,5 +66,4 @@ public class ResultController {
     private List<ResultDTO> getAllResultsByGame(Integer gameNumber) {
         return resultService.getAllResultsByGame(gameNumber);
     }
-
 }
