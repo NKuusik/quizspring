@@ -23,4 +23,8 @@ public class ResultService {
     public List<ResultDTO> getAllResultsByGame(Integer gameNumber) {
         return ResultMapper.INSTANCE.toDTOList(resultRepository.findByGame_GameNumber(gameNumber));
     }
+
+    public List<ResultDTO> getAllResultsByTeamAndGame(String teamName, Integer gameNumber) {
+        return ResultMapper.INSTANCE.toDTOList(resultRepository.findByTeam_NameAndGame_GameNumber(teamName, gameNumber));
+    }
 }

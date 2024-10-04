@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/result")
@@ -24,12 +25,14 @@ public class ResultController {
 
     @GetMapping
     List<ResultDTO> getAllResults(
-        @RequestParam(name= "team", required = false) String teamName,
-        @RequestParam(name= "game", required = false) Integer gameNumber) {
-        if (teamName != null) {
-            return getAllResultsByTeam(teamName);
-        } else if (gameNumber != null) {
-            return getAllResultsByGame(gameNumber);
+        @RequestParam(name= "team") Optional<String> teamNameOptional,
+        @RequestParam(name= "game") Optional<Integer> gameNumberOptional) {
+        if (teamNameOptional.isPresent() && gameNumberOptional.isPresent()) {
+            return getAllResultsByTeamAndGame(teamNameOptional.get(), gameNumberOptional.get());
+        } else if (teamNameOptional.isPresent()) {
+            return getAllResultsByTeam(teamNameOptional.get());
+        } else if (gameNumberOptional.isPresent()) {
+            return getAllResultsByGame(gameNumberOptional.get());
         } else {
             // Todo: throw error instead.
             return new ArrayList<>();
@@ -40,7 +43,11 @@ public class ResultController {
         return resultService.getAllResultsByTeam(teamName);
     }
 
-        private List<ResultDTO> getAllResultsByGame(Integer gameNumber) {
+    private List<ResultDTO> getAllResultsByGame(Integer gameNumber) {
         return resultService.getAllResultsByGame(gameNumber);
+    }
+
+    private List<ResultDTO> getAllResultsByTeamAndGame(String teamName, Integer gameNumber) {
+        return resultService.getAllResultsByTeamAndGame(teamName, gameNumber);
     }
 }
