@@ -1,11 +1,10 @@
 # Readme
 
-## How to initialize the database locally
+## Notes on running the application
 
-1. Run the spring application so that tables would be created in liquibase 
-2. Run `python3 db_initialization/copy_data.py` from the root of the project 
-to transform data in .csv files to database tables.
-   - Note that due to differences in pathname conventions, this script does not work in a Windows environment.
+- After the Spring application has been successfully initialized, python script `db_initialization/copy_data.py` is run to add source data from `.csv` files if needed.
+  - Note that due to differences in pathname conventions, the python script does not work in a Windows environment.
+- Before building a new Docker image, compile the `.jar` file using `./gradlew build`.
 
 ## Useful database scripts
 

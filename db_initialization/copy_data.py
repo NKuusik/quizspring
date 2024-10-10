@@ -2,6 +2,13 @@ import sqlite3
 from pathlib import Path
 import subprocess
 
+def is_database_empty():
+    conn = sqlite3.connect('mydatabase.db')
+    cursor = conn.cursor()
+    cursor.execute('select * from team')
+    rows = cursor.fetchall()
+    return not rows
+
 def import_csv_data(file_path, db_path, file_name):
     db_path = Path(db_path).resolve()
     file_path = Path(file_path).resolve()
@@ -57,8 +64,9 @@ def copy_data(table_number):
 
 
 if __name__ == '__main__':
-    for x in range(4, 14): 
-        import_csv_data(f'db_initialization/resources/hooaeg_{x}.csv', 
+    if is_database_empty():
+        for x in range(4, 14): 
+            import_csv_data(f'db_initialization/resources/hooaeg_{x}.csv', 
                         'mydatabase.db', f'hooaeg_{x}')
-        copy_data(x)
+            copy_data(x)
 
